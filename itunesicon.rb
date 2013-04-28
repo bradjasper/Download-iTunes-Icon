@@ -1,7 +1,7 @@
 #!/usr/bin/ruby
 # encoding: utf-8
 #
-# Retrieve an iOS app icon at 512x512px
+# Retrieve an iOS app icon at the highest available resolution
 # All arguments are combined to create an iTunes search
 # The icon for the first result, if found, is written to a filename based on search terms
 #
