@@ -5,10 +5,8 @@
 # All arguments are combined to create an iTunes search
 # The icon for the first result, if found, is written to a filename based on search terms
 #
-# Add "#mac", "#iphone" or "#ipad" to specify which version you're looking for. "@" works, too.
-#
 # example:
-# $ itunesicon super monsters ate my condo #iphone
+# $ itunesicon super monsters ate my condo
 
 %w[net/http open-uri cgi].each do |filename|
   require filename
@@ -28,15 +26,15 @@ end
 terms = ARGV.join(" ")
 entity = "iPadSoftware"
 type = "_ipad"
-if terms =~ /[#@](ipad|iphone|mac)/i
-  if terms =~ /[#@]iphone/i
+if terms =~ /[\#@](ipad|iphone|mac)/i
+  if terms =~ /[\#@]iphone/i
     entity = "software"
     type = "_iphone"
-  elsif terms =~ /[#@]mac/i
+  elsif terms =~ /[\#@]mac/i
     entity = "macSoftware"
     type = "_mac"
   end
-  terms.gsub!(/[#@](ipad|iphone|mac)/i, "").gsub!(/\s+/," ")
+  terms.gsub!(/[\#@](ipad|iphone|mac)/i, "").gsub!(/\s+/," ")
 end
 
 terms.strip!
