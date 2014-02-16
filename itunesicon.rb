@@ -69,8 +69,6 @@ begin
       file.puts f.read
     end
     puts "#{target}"
-	puts "#{target}"
-	puts "#{target}"
   end
 rescue
   puts "Error: failed to save icon."
