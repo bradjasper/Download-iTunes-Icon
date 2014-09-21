@@ -1,0 +1,5 @@
+#!/bin/bash
+
+rm images/*.png
+ruby itunesicon.rb quiztones
+ruby itunesicon.rb ear trainer

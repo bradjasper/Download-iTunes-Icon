@@ -62,7 +62,10 @@ unless icon_url
   exit
 end
 url = URI.parse(icon_url)
-target = File.expand_path("~/Desktop/"+terms.gsub(/[^a-z0-9]+/i,'-')+type+"."+icon_url.match(/\.(jpg|png)$/)[1])
+target = File.expand_path("./images/icon-"+terms.gsub(/[^a-z0-9]+/i,'-')+"."+icon_url.match(/\.(jpg|png)$/)[1])
+rounded = File.expand_path("./images/icon-"+terms.gsub(/[^a-z0-9]+/i,'-')+"-rounded."+icon_url.match(/\.(jpg|png)$/)[1])
+twox = File.expand_path("./images/icon-"+terms.gsub(/[^a-z0-9]+/i,'-')+"@2x."+icon_url.match(/\.(jpg|png)$/)[1])
+threex = File.expand_path("./images/icon-"+terms.gsub(/[^a-z0-9]+/i,'-')+"@3x."+icon_url.match(/\.(jpg|png)$/)[1])
 begin
   open(url) do |f|
     File.open(target,'w+') do |file|
@@ -73,3 +76,14 @@ begin
 rescue
   puts "Error: failed to save icon."
 end
+
+# Make rounded
+convert = `convert -size 1024x1024 xc:none -fill white -draw 'roundRectangle 0,0 1024,1024 160,160' #{target} -compose SrcIn -composite #{rounded}`
+
+# Make @2x and @3x assets
+convert = `convert #{rounded} -resize 80x80 #{twox}`
+convert = `convert #{rounded} -resize 120x120 #{threex}`
+
+puts rounded
+puts twox
+puts threex
